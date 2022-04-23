@@ -4,7 +4,7 @@ In this milestone you are setting up the basic end points of your web service th
 
 See the documentation on the endpoints at http://people.cs.uchicago.edu/~aelmore/class/30235/RestInsp.html to see what functionality you will need to implement.
 
-The code in server/ has many instances of `#TODO milestone 1` that represent various pieces of functionality that you need to implement to complete the milestone. If the TODO is followed by a return or raise, you will need to replace the following line with the appropriate return value. These can be found in server.py (the main web/app service) and db.py (the data access object/layer that will interface with the DBMS). You can add new classes/files to help with abstracting functionality if you want. Remember to check these in!
+The code in server/ has many instances of `#TODO MS1` that represent various pieces of functionality that you need to implement to complete the milestone. If the TODO is followed by a return or raise, you will need to replace the following line with the appropriate return value. These can be found in server.py (the main web/app service) and db.py (the data access object/layer that will interface with the DBMS). You can add new classes/files to help with abstracting functionality if you want. Remember to check these in!
 
 Please see the documentation on the API and schema at http://people.cs.uchicago.edu/~aelmore/class/30235/RestInsp.html
 
@@ -119,9 +119,30 @@ curl http://127.0.0.1:30235/restaurants/1
 or go to http://127.0.0.1:30235/restaurants/1 in your favorite browser.
 
 
-If you had a fresh (empty) DB before running 2.1 you should an output like
+If you had a fresh (empty) DB before running 2.1 you should an output like (2.2 would look slightly different)
 ```
-{"restaurant": {"id": 1, "name": "TORTOISE CLUB", "facility_type": "Restaurant", "address": "350 N STATE ST ", "city": "CHICAGO", "state": "IL", "zip": "60654", "clean": false, "latitude": 41.8888959276944, "longitude": -87.6282000827626}, "inspections": [{"id": "2359211", "risk": "Risk 1 (High)", "inspection_type": "Canvass", "results": "Pass", "violations": "", "date": "01/23/2020"}, {"id": "2356959", "risk": "Risk 1 (High)", "inspection_type": "Canvass", "results": "No Entry", "violations": "", "date": "01/17/2020"}]}
+{
+  "id": 1,
+  "name": "TORTOISE CLUB",
+  "facility_type": "Restaurant",
+  "address": "350 N STATE ST ",
+  "city": "CHICAGO",
+  "state": "IL",
+  "zip": "60654",
+  "clean": 0,
+  "latitude": 41.888895927694364,
+  "longitude": -87.62820008276263,
+  "inspections": [
+    {
+      "id": "2359211",
+      "risk": "Risk 1 (High)",
+      "inspection_date": "2020-01-23 00:00:00",
+      "inspection_type": "Canvass",
+      "results": "Pass",
+      "violations": ""
+    }
+  ]
+}
 ```
 
 Then run the test file. In a new terminal, while the server is running, run from the root directory 
@@ -144,7 +165,18 @@ or go to http://127.0.0.1:30235/restaurants/by-inspection/2356959 in your favori
 
 If you had a fresh (empty) DB before running 2.1 you should an output like
 ```
-{"id": 1, "name": "TORTOISE CLUB", "facility_type": "Restaurant", "address": "350 N STATE ST ", "city": "CHICAGO", "state": "IL", "zip": "60654", "clean": false, "latitude": 41.8888959276944, "longitude": -87.6282000827626}
+{
+  "id": 1,
+  "name": "TORTOISE CLUB",
+  "facility_type": "Restaurant",
+  "address": "350 N STATE ST ",
+  "city": "CHICAGO",
+  "state": "IL",
+  "zip": "60654",
+  "clean": 0,
+  "latitude": 41.888895927694364,
+  "longitude": -87.62820008276263
+}
 ```
 
 ### Test 4.2
