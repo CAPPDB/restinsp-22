@@ -10,9 +10,6 @@ See the documentation on the endpoints to see what functionality you will need t
 
 The code in server/ has many instances of `#TODO MS2` or `#TODO milestone 2` that represent various pieces of functionality that you need to implement to complete the milestone. If the TODO is followed by a return or raise, you will need to replace the following line with the appropriate return value. These can be found in server.py (the main web/app service). You will need add new functions/methods in db.py (the data access object/layer that will interface with the DBMS). You can add new classes/files to help with abstracting functionality if you want. Remember to check these in! 
 
-## New client
-This milestone has a new client program loader2.py.  This client takes as input a script json file that can invoke endpoints and/or another script file.  Each endpoint has expected response code(s) and optionally a body that will be returned.
-
 ## Step 1 Count Inspection Records
 Implement the function
 ```
