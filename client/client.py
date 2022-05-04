@@ -86,6 +86,15 @@ def run_test_file(server, test_file_path, fail_on_wrong_response=True):
                         raise LoaderError("Failure (%s) on get to %s  " % (r.status_code, get_url))
                 else:
                     res = r.json()
+                    if 'clean' in res and 'clean' in expected:
+                        if expected['clean']==0 and res['clean'] == 'FALSE':
+                            res['clean'] = 0
+                        elif expected['clean']==1 and res['clean'] == 'TRUE':
+                            res['clean'] = 1
+                        elif expected['clean']=='TRUE' and res['clean'] == 1:
+                            res['clean'] = 'TRUE'
+                        elif expected['clean']=='FALSE' and res['clean'] == 0:
+                            res['clean'] = 'FALSE'
                     if isinstance(expected, list) and not isinstance(res, list):
                         res = [res]
                     if expected != res:
