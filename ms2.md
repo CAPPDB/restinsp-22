@@ -26,19 +26,17 @@ To run this test, start your server and in a new shell/terminal:
 python3 client/client.py -f data/ms2-10/ms2.json
 ```
 
-Your client output should look like:
+Your client output should look like (this might not match exactly, but seeing the done at the bottom is important.):
 ```
 Running script data/ms2-10/ms2.json
-Called http://localhost:30235/create
-Called http://localhost:30235/count
-Expected content matched
-Ran file small-insp.json Successful 9
-Called http://localhost:30235/count
-Expected content matched
-Called http://localhost:30235/reset
-Called http://localhost:30235/count
-Expected content matched
+Called http://127.0.0.1:30235/create
+Called http://127.0.0.1:30235/count
+Ran file small-insp.json Successful 10
+Called http://127.0.0.1:30235/count
+Called http://127.0.0.1:30235/reset
+Called http://127.0.0.1:30235/count
 Done
+
 ```
 
 ## Step 2 Transactional Loading
@@ -89,12 +87,12 @@ python3 client/client.py -f data/ms2-10/ms2t7abort.json
 
 Your output should look like 
 ```
-Called http://localhost:30235/create
-Called http://localhost:30235/txn/7
-Ran file small-insp.json Successful 9
-Called http://localhost:30235/abort
-Called http://localhost:30235/count
-Expected content matched
+Running script data/ms2-10/ms2t7abort.json
+Called http://127.0.0.1:30235/create
+Called http://127.0.0.1:30235/txn/7
+Ran file small-insp.json Successful 10
+Called http://127.0.0.1:30235/abort
+Called http://127.0.0.1:30235/count
 Done
 ```
 
@@ -140,7 +138,7 @@ Next implement the function:
 def find_restaurant_tweets(restaurant_id):
 ```
 
-This should simply return a list of tweets that matched the restaurant. Each item should have a tweet id/key and the method how the tweet was matched to the restaurant.  
+This should simply return a list of tweets that matched the restaurant. Each item should have a tweet id/key and the method how the tweet was matched to the restaurant.  Note tweets should be sorted by tkey if a restaurant has more than one tweet.
 
 ## Step 4.2 Test Tweets
 For this milestone there is a simple test that loads several tweets, 2 of which match (1 via name and the other via geo).
@@ -163,8 +161,27 @@ Expected content matched
 Done
 ```
 
-Look for more tests soon!
+## Larger Tweet Test
+We have added some larger tests that add more inspections and tweets. You can run this via
+```
+python3 client/client.py -f data/ms2-100/full.json
+```
 
+```
+Running script data/ms2-100/full.json
+Called http://127.0.0.1:30235/create
+Ran file add-insp.json Successful 96
+Ran file add-insp-existing.json Successful 3
+Ran file read-rest-id.json Successful 96
+Ran file read-rest-by-insp.json Successful 99
+Ran file twit.json Successful 1000
+Ran file tweet_test.json Successful 33
+Done
+```
+
+This test is likely to expose new logic errors with your code. You may need to make a new test to isolate your bugs. I would suggest identifying the tweets or restaurants that are causing the issue, and creating a new test to only contain the relevant tweets.
+
+This would involve making a copy of full.json, twit.json, and tweet_test.json -- with changing twit.json and tweet_test.json to only include the relevant test data. You would then want to change full.json to use your new post and test data.
 
 ## Fin and Write Up
 Please add a write up ms2.txt. Include about what functionality is not complete (if any). Please indicate how much time you spent on the project and if you got stuck on any particular part.  If you worked with a partner you must specify how you divided the work. With this your MS should be good to go! Feel free to do additional testing. More client evaluation components will come in a future MS.

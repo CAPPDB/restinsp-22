@@ -27,10 +27,11 @@ def get_db_conn():
     """ 
     gets connection to database
     """
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
+    if "_database" not in app.config:
+        app.config["_database"] = sqlite3.connect(DATABASE)
+        return app.config["_database"] 
+    else:
+        return app.config["_database"] 
 
 # default path
 @app.route('/')
@@ -290,14 +291,6 @@ def handle_invalid_usage(error):
     return response
 
 
-# called on close of response; closes db connection
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -358,4 +351,4 @@ if __name__ == "__main__":
     app.config['addr'] = "http://%s:%s" % (args.host, args.port)
 
     logging.info("Starting Inspection Service")
-    app.run(host=args.host, port=args.port)
+    app.run(host=args.host, port=args.port, threaded=False)
