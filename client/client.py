@@ -139,7 +139,17 @@ def run_script(script_file, cfg):
                         raise LoaderError("Failure on %s. Expected %s Got %s" % (get_url, script["response"], r.status_code))
                 else:
                     print("Called %s" % get_url)
-                    if cfg.out:
+                    if "body" in script:
+                        if r.text == script["body"]:
+                            if cfg.out:
+                                out_file.write("get-%s ok\n"% get_url)
+                        else:                           
+                            err_msg = "Failure on %s. Expected %s Got %s" % (get_url, script["body"], r.text)
+                            if cfg.nofailfast:
+                                print(err_msg)
+                            else:
+                                raise LoaderError(err_msg)                       
+                    elif cfg.out:
                         out_file.write("get-%s ok\n"% get_url)
             else:
                 try:
