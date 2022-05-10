@@ -1,6 +1,6 @@
 {
   "post_path": "tweet",
-  "response": 200,
+  "response": 201,
   "values": [
     {
       "key": "2016-05-23_15:20:54-charl_margo",

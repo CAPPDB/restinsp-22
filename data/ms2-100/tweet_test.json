@@ -1,6 +1,6 @@
 {
   "get_path": "tweets",
-  "response": 201,
+  "response": 200,
   "tests": [
     {
       "inputs": "56",
