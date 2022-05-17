@@ -54,7 +54,7 @@ CREATE TABLE ri_linked (
 Implement the (new) function
 
 ```
-@app.get("/restaurants/all-by-inspection/<inspection_id>")
+@app.route("/restaurants/all-by-inspection/<inspection_id>",methods=["GET"])
 def find_all_restaurants_by_inspection_id(inspection_id):
 ```
 
